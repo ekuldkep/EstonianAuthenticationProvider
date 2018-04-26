@@ -14,80 +14,72 @@ namespace TestAuthPackage.Helpers
     {
         public static string BaseCert;
         public static List<string> MiddleCertifications;
-
         public static string Thumbprint;
-
         public RequestDelegate _next;
+        public static string RedirectUrl;
 
+        public virtual DigiDocService GetDigiDocService()
+        {
+            return new DigiDocService();
+        }
         public virtual CertificationVerificationHelper GetClient(HttpContext httpContext)
         {
-            return new CertificationVerificationHelper();
+            return new CertificationVerificationHelper(GetDigiDocService());
         }
 
-        public virtual async Task<CertificationInfoDto> CheckCertificationInfo(HttpContext httpContext, string clientCertificate, List<string> middleCertifications, string baseCert)
+        public virtual async Task<CertificationInfoDto> CheckCertificationInfo(HttpContext httpContext, string clientCertificate)
         {
             var client = GetClient(httpContext);
-            return await client.CertificationInfoAndChain(clientCertificate, middleCertifications, baseCert);
+            return await client.CertificationInfoAndChain(clientCertificate, MiddleCertifications, BaseCert);
         }
 
-        public virtual async Task<string> GetThumbprintSettings(HttpContext httpContext)
+        public virtual async Task<string> GetCertifikateSettings(HttpContext httpContext)
         {
             return Thumbprint;
         }
-        public virtual async Task<string> GetThumbprintHttpContext(HttpContext httpContext)
+        public virtual async Task<string> GetCertificateHttpContext(HttpContext httpContext)
         {
             X509Certificate2 clientCertificate = await httpContext.Connection.GetClientCertificateAsync();
-            return clientCertificate.Thumbprint;
+            return Convert.ToBase64String(clientCertificate.Export(X509ContentType.Cert));
         }
 
-        public virtual async Task<string> GetThumbprintHttpRequestHeader(HttpContext httpContext)
+        public virtual async Task<string> GetCertificateHttpRequestHeader(HttpContext httpContext)
         {
             HttpRequest request = httpContext.Request;
-            var headers = request.Headers.TryGetValue("SSL_CLIENT_CERT", out var headerCertString);  // TODO: can not use?
+            var headers = request.Headers.TryGetValue("SSL_CLIENT_CERT", out var headerCertString);  
             var str = headerCertString.ToString();
             str = str.Replace("-----BEGIN CERTIFICATE-----", "").Replace("-----END CERTIFICATE-----", "");
             return str;
         }
 
-
-        public virtual async Task<string> GetThumbprint(HttpContext httpContext)
+        public virtual async Task<string> GetCertificate(HttpContext httpContext)
         {
-            return await GetThumbprintHttpContext(httpContext);
+            return await GetCertificateHttpContext(httpContext);
+        }
+
+        public virtual string EncryptResponse(AuthenticationDto authentication)
+        {
+            return SecurityHelper.EncryptString(authentication.PropertyValuesCommaSeparated(),
+                EncryptionKey.Key());
         }
 
         public async Task Invoke(HttpContext httpContext)
         {
-            X509Certificate2 clientCertificate;
-            var thumbprint = await GetThumbprint(httpContext);
+            var certificate = await GetCertificate(httpContext);
 
-            try
+            if (!String.IsNullOrEmpty(certificate))
             {
-                var certBytes = Convert.FromBase64String(thumbprint);
-                clientCertificate = new X509Certificate2(certBytes);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message + ":" + thumbprint);
-                throw;
-            }
-            
-            string convertedCert = Convert.ToBase64String(clientCertificate.Export(X509ContentType.Cert));
+                var certificationInfo = CheckCertificationInfo(httpContext, certificate);
 
-            if (!String.IsNullOrEmpty(convertedCert))
-            {
-                var certificationInfo = CheckCertificationInfo(httpContext, convertedCert, MiddleCertifications, BaseCert);
-
-                if (certificationInfo.Result.IsCertificateValid && certificationInfo.Result.IsCertificationFromValidRoot)
+                if (certificationInfo.Result.CanRedirect)
                 {
-                    var encryptedCertInfo = SecurityHelper.EncryptString(
-                        certificationInfo.Result.AuthenticationDto.IdCode,
-                        EncryptionKey.Key());
+                    var encryptedCertInfo = EncryptResponse(certificationInfo.Result.AuthenticationDto);
 
                     var token = System.Net.WebUtility.UrlEncode(encryptedCertInfo);
 
                     if (!httpContext.Request.QueryString.ToString().Contains("?token="))
                     {
-                        var newPath = httpContext.Request.Path + $"?token={token}"; // Rewrite the paths
+                        var newPath = RedirectUrl + $"?token={token}"; 
                         httpContext.Response.Redirect(newPath, false);
                     }
                 }

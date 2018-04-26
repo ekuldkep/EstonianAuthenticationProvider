@@ -13,17 +13,10 @@ namespace TestAuthPackage.Helpers
 {
     public class CertificationVerificationHelper
     {
-        public static string ServiceName = "DigiDocService";
-        public static string EndpointUrl = "https://tsp.demo.sk.ee/dds.wsdl";
-
-        public virtual DigiDocServicePortTypeClient ReturnDigiDocService()
+        public DigiDocService DigiDocService;
+        public CertificationVerificationHelper(DigiDocService digiDocService)
         {
-            // https://stackoverflow.com/a/3704312
-            var binding = new BasicHttpBinding();
-            binding.Name = ServiceName;
-            binding.Security.Mode = BasicHttpSecurityMode.Transport;
-            var endpoint = new EndpointAddress(EndpointUrl);
-            return new DigiDocServicePortTypeClient(binding, endpoint);
+            DigiDocService = digiDocService;
         }
 
         public virtual CertificationInfoDto MakeResponse(CheckCertificateResponse checkCertificateResponse)
@@ -35,56 +28,73 @@ namespace TestAuthPackage.Helpers
                 {
                     FirstName = checkCertificateResponse.UserGivenname,
                     LastName = checkCertificateResponse.UserSurname,
-                    IdCode = checkCertificateResponse.UserIDCode
+                    IdCode = checkCertificateResponse.UserIDCode,
+                    EnhancedKeyUsage = checkCertificateResponse.EnhancedKeyUsage,
+                    IssuerCN = checkCertificateResponse.IssuerCN,
+                    KeyUsage = checkCertificateResponse.KeyUsage,
+                    RevocationData = checkCertificateResponse.RevocationData,
+                    Status = checkCertificateResponse.Status,
+                    UserCN = checkCertificateResponse.UserCN,
+                    UserCountry = checkCertificateResponse.UserCountry,
+                    UserOrganisation = checkCertificateResponse.UserOrganisation,
                 };
                 certificationInfoDto.IsCertificateValid = true;
                 certificationInfoDto.AuthenticationDto = authenticationDto;
-                certificationInfoDto.IsCertificationFromValidRoot = true;
+                certificationInfoDto.CertifikateChainStatus = CertificateChainStatusEnum.NotChecked; // kas muuta bool stringiks kuna mul on kolme väärtust vaja? 
+                certificationInfoDto.CanRedirect = true;
+                certificationInfoDto.CertificateStatus = checkCertificateResponse.Status;
                 return certificationInfoDto;
             }
 
+            certificationInfoDto.CanRedirect = false;
             certificationInfoDto.IsCertificateValid = false;
             certificationInfoDto.AuthenticationDto = null;
-            certificationInfoDto.IsCertificationFromValidRoot = true;
+            certificationInfoDto.CertifikateChainStatus = CertificateChainStatusEnum.NotChecked;
+            certificationInfoDto.CertificateStatus = checkCertificateResponse.Status;
 
             return certificationInfoDto;
         }
 
+        //By default does chain check 
+        
         public async Task<CertificationInfoDto> CertificationInfoAndChain(string clientCertificate, List<string> middleCertifications, string baseCert)
         {
             var isCertFromValidChain = IsClientCertFromValidRoot(clientCertificate, middleCertifications, baseCert);
             if (!isCertFromValidChain)
             {
-                return new CertificationInfoDto { IsCertificationFromValidRoot = false };
+                return new CertificationInfoDto
+                {
+                    CertifikateChainStatus = CertificateChainStatusEnum.InvalidRoot,
+                    CanRedirect = false
+                };
             }
 
+            var response = await CertificationInfoWoChain(clientCertificate);
+            response.CertifikateChainStatus = CertificateChainStatusEnum.ValidRoot;
+            return response;
+        }
+
+        //can be used if client does not want to check if certificate is from valid root
+        public async Task<CertificationInfoDto> CertificationInfoWoChain(string clientCertificate)
+        {
             return await CertificationInfo(clientCertificate);
         }
 
         public async Task<CertificationInfoDto> CertificationInfo(string clientCertificate)
         {
-            var cerClient = ReturnDigiDocService();
+            var cerClient = DigiDocService.ReturnDigiDocService();
             var certInfo = await cerClient.CheckCertificateAsync(new CheckCertificateRequest(clientCertificate, true));
             return MakeResponse(certInfo);
         }
 
-        public async Task<string> FredFunctionThatReplacesPreviousTHing(string clientCertificate)
-        {
-            var cerClient = ReturnDigiDocService();
-            var certInfo = await cerClient.CheckCertificateAsync(new CheckCertificateRequest(clientCertificate, true));
-            return certInfo.UserIDCode;
-        }
-
         private static bool IsClientCertFromValidRoot(string clientCertificate, List<string> additionalCertificates, string baseCert)
         {
-            var convertedCertificates = ConvertAllCertificates(clientCertificate, additionalCertificates, baseCert);
-            var clietCert = convertedCertificates.ClientCertificate;
-            foreach (var additionalCertificate in convertedCertificates.AdditionalCertificates)
+            foreach (var additionalCertificate in additionalCertificates)
             {
-                List<byte[]> middleCertsBytes = new List<byte[]>();
-                middleCertsBytes.Add(additionalCertificate);
-                middleCertsBytes.Add(convertedCertificates.BaseCertificate);
-                var isCertfromValidRoot = VerifyCertificate(clietCert, middleCertsBytes);
+                List<string> certificationChain = new List<string>();
+                certificationChain.Add(additionalCertificate);
+                certificationChain.Add(baseCert);
+                var isCertfromValidRoot = VerifyCertificate(clientCertificate, certificationChain);
                 if (isCertfromValidRoot)
                 {
                     return true;
@@ -92,7 +102,7 @@ namespace TestAuthPackage.Helpers
             }
             return false;
         }
-        private static bool VerifyCertificate(byte[] primaryCertificate, List<byte[]> additionalCertificates)
+        private static bool VerifyCertificate(string primaryCertificate, List<string> additionalCertificates)
         {
             var chain = new X509Chain();
 
@@ -125,39 +135,6 @@ namespace TestAuthPackage.Helpers
             return true;
         }
 
-        private static byte[] ConvertCertToByteArray(string certificate)
-        {
-            var convertedCert = Encoding.ASCII.GetBytes(certificate);
-            return convertedCert;
-        }
-
-        public static AllCertificates ConvertAllCertificates(string clientCert, List<string> middleCerts, string baseCert)
-        {
-            List<byte[]> middleCertsBytes = new List<byte[]>();
-
-            foreach (var middleCert in middleCerts)
-            {
-                var byteCertContainer = ConvertCertToByteArray(middleCert);
-                middleCertsBytes.Add(byteCertContainer);
-            }
-            var certificates = new AllCertificates()
-            {
-                ClientCertificate = ConvertCertToByteArray(clientCert),
-                BaseCertificate = ConvertCertToByteArray(baseCert),
-                AdditionalCertificates = middleCertsBytes
-            };
-
-            return certificates;
-        }
-
     }
-
-    public class AllCertificates
-    {
-        public List<byte[]> AdditionalCertificates { get; set; }
-        public byte[] ClientCertificate { get; set; }
-        public byte[] BaseCertificate { get; set; }
-
-
-    }
+   
 }

@@ -15,59 +15,70 @@ namespace TestAuthPackage.Helpers
         public static string BaseCert;
         public static List<string> MiddleCertifications;
         public static string Thumbprint;
-        public RequestDelegate _next;
+        public RequestDelegate Next;
         public static string RedirectUrl;
 
+        //By default returns DigiDocService with test wsdl
         public virtual DigiDocService GetDigiDocService()
         {
             return new DigiDocService();
         }
+
+        //Returns ertificationVerificationHelper
         public virtual CertificationVerificationHelper GetClient(HttpContext httpContext)
         {
             return new CertificationVerificationHelper(GetDigiDocService());
         }
 
+        //By default checks if certificate is from valid root, can be overwritten with method that does not check chain
         public virtual async Task<CertificationInfoDto> CheckCertificationInfo(HttpContext httpContext, string clientCertificate)
         {
             var client = GetClient(httpContext);
             return await client.CertificationInfoAndChain(clientCertificate, MiddleCertifications, BaseCert);
         }
 
+        //Is useful for testing, does not have to use certificate
         public virtual async Task<string> GetCertifikateSettings(HttpContext httpContext)
         {
-            return Thumbprint;
+            return await Task.FromResult(Thumbprint);
         }
+
+        //Default value, can be used if server is IIS
         public virtual async Task<string> GetCertificateHttpContext(HttpContext httpContext)
         {
             X509Certificate2 clientCertificate = await httpContext.Connection.GetClientCertificateAsync();
             return Convert.ToBase64String(clientCertificate.Export(X509ContentType.Cert));
         }
 
+        //Can be used if other server besides IIS is used
         public virtual async Task<string> GetCertificateHttpRequestHeader(HttpContext httpContext)
         {
             HttpRequest request = httpContext.Request;
             var headers = request.Headers.TryGetValue("SSL_CLIENT_CERT", out var headerCertString);  
             var str = headerCertString.ToString();
             str = str.Replace("-----BEGIN CERTIFICATE-----", "").Replace("-----END CERTIFICATE-----", "");
-            return str;
+            return await Task.FromResult(str);
         }
 
+        //ByDefault uses method for iis server but can be overwritten for using other server or with custom method
         public virtual async Task<string> GetCertificate(HttpContext httpContext)
         {
             return await GetCertificateHttpContext(httpContext);
         }
 
+        //Default encryption can be overwritten with custom encryption
         public virtual string EncryptResponse(AuthenticationDto authentication)
         {
             return SecurityHelper.EncryptString(authentication.PropertyValuesCommaSeparated(),
                 EncryptionKey.Key());
         }
 
+        //Starts ID Card authentication
         public async Task Invoke(HttpContext httpContext)
         {
             var certificate = await GetCertificate(httpContext);
 
-            if (!String.IsNullOrEmpty(certificate))
+            if (!string.IsNullOrEmpty(certificate))
             {
                 var certificationInfo = CheckCertificationInfo(httpContext, certificate);
 
@@ -84,7 +95,7 @@ namespace TestAuthPackage.Helpers
                     }
                 }
             }
-            await _next(httpContext);
+            await Next(httpContext);
         }
     }
 }

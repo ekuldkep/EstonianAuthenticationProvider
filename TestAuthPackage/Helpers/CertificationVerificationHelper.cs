@@ -19,6 +19,7 @@ namespace TestAuthPackage.Helpers
             DigiDocService = digiDocService;
         }
 
+        //Makes response
         public virtual CertificationInfoDto MakeResponse(CheckCertificateResponse checkCertificateResponse)
         {
             var certificationInfoDto = new CertificationInfoDto();
@@ -56,8 +57,7 @@ namespace TestAuthPackage.Helpers
         }
 
         //By default does chain check 
-        
-        public async Task<CertificationInfoDto> CertificationInfoAndChain(string clientCertificate, List<string> middleCertifications, string baseCert)
+        public virtual async Task<CertificationInfoDto> CertificationInfoAndChain(string clientCertificate, List<string> middleCertifications, string baseCert)
         {
             var isCertFromValidChain = IsClientCertFromValidRoot(clientCertificate, middleCertifications, baseCert);
             if (!isCertFromValidChain)
@@ -75,25 +75,25 @@ namespace TestAuthPackage.Helpers
         }
 
         //can be used if client does not want to check if certificate is from valid root
-        public async Task<CertificationInfoDto> CertificationInfoWoChain(string clientCertificate)
+        public virtual async Task<CertificationInfoDto> CertificationInfoWoChain(string clientCertificate)
         {
             return await CertificationInfo(clientCertificate);
         }
 
-        public async Task<CertificationInfoDto> CertificationInfo(string clientCertificate)
+        //Does request to DigiDocService
+        public virtual async Task<CertificationInfoDto> CertificationInfo(string clientCertificate)
         {
             var cerClient = DigiDocService.ReturnDigiDocService();
             var certInfo = await cerClient.CheckCertificateAsync(new CheckCertificateRequest(clientCertificate, true));
             return MakeResponse(certInfo);
         }
 
-        private static bool IsClientCertFromValidRoot(string clientCertificate, List<string> additionalCertificates, string baseCert)
+        //Makes Chains
+        public virtual bool IsClientCertFromValidRoot(string clientCertificate, List<string> additionalCertificates, string baseCert)
         {
             foreach (var additionalCertificate in additionalCertificates)
             {
-                List<string> certificationChain = new List<string>();
-                certificationChain.Add(additionalCertificate);
-                certificationChain.Add(baseCert);
+                List<string> certificationChain = new List<string> {additionalCertificate, baseCert};
                 var isCertfromValidRoot = VerifyCertificate(clientCertificate, certificationChain);
                 if (isCertfromValidRoot)
                 {
@@ -102,7 +102,9 @@ namespace TestAuthPackage.Helpers
             }
             return false;
         }
-        private static bool VerifyCertificate(string primaryCertificate, List<string> additionalCertificates)
+
+        //Verifies current chain
+        public virtual bool VerifyCertificate(string primaryCertificate, List<string> additionalCertificates)
         {
             var chain = new X509Chain();
 

@@ -74,7 +74,7 @@ namespace TestAuthPackage.Helpers
         }
 
         //Starts ID Card authentication
-        public async Task Invoke(HttpContext httpContext)
+        public async Task InvokeCert(HttpContext httpContext)
         {
             var certificate = await GetCertificate(httpContext);
 

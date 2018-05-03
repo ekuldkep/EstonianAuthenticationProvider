@@ -12,11 +12,11 @@ namespace TestAuthPackage.Helpers
     // You may need to install the Microsoft.AspNetCore.Http.Abstractions package into your project
     public class AuthMiddleware
     {
-        private readonly string BaseCert;
-        private readonly List<string> MiddleCertifications;
-        private readonly string Thumbprint;
-        private readonly RequestDelegate Next;
-        private readonly string RedirectUrl;
+        public readonly string BaseCert;
+        public readonly List<string> MiddleCertifications;
+        public readonly string Thumbprint;
+        public readonly RequestDelegate Next;
+        public readonly string RedirectUrl;
 
         //By default returns DigiDocService with test wsdl
         public virtual DigiDocService GetDigiDocService()

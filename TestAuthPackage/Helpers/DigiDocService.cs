@@ -8,29 +8,29 @@ namespace TestAuthPackage.Helpers
 {
     public class DigiDocService
     {
-        private readonly string ServiceName = "DigiDocService";
-        private readonly string EndpointUrl = "https://tsp.demo.sk.ee/dds.wsdl";
-        private readonly BasicHttpSecurityMode SecurityMode = BasicHttpSecurityMode.Transport;
-        private readonly TimeSpan CloseTimeout = TimeSpan.FromMinutes(1);
-        private readonly TimeSpan OpenTimeout = TimeSpan.FromMinutes(1);
-        private readonly TimeSpan SendTimeout = TimeSpan.FromMinutes(1);
-        private readonly TimeSpan RecieveTimeout = TimeSpan.FromMinutes(10);
-        private readonly bool AllowCookies = false;
-        private readonly bool BypassProxyOnLocal = false;
-        private readonly int MaxBufferSize = 65536;
-        private readonly int MaxBufferPoolSize = 524288;
-        private readonly TransferMode TransferMode = TransferMode.Buffered;
-        private readonly Encoding TextEncoding = System.Text.Encoding.UTF8;
-        private readonly bool UseDefaultWebProxy = true;
-        private readonly int MaxDepth = 32;
-        private readonly int MaxStringContentLength = 8192;
-        private readonly int MaxArrayLength = 16384;
-        private readonly int MaxBytesPerRead = 4096;
-        private readonly int MaxNameTableCharCount = 8192;
-        private readonly HttpClientCredentialType ClientCredentialType = HttpClientCredentialType.None;
-        private readonly HttpProxyCredentialType ProxyCredentialType = HttpProxyCredentialType.None;
-        private readonly string Realm = "";
-        private readonly BasicHttpMessageCredentialType BasicClientCredentialType = BasicHttpMessageCredentialType.UserName;
+        public readonly string ServiceName = "DigiDocService";
+        public readonly string EndpointUrl = "https://tsp.demo.sk.ee/dds.wsdl";
+        public readonly BasicHttpSecurityMode SecurityMode = BasicHttpSecurityMode.Transport;
+        public readonly TimeSpan CloseTimeout = TimeSpan.FromMinutes(1);
+        public readonly TimeSpan OpenTimeout = TimeSpan.FromMinutes(1);
+        public readonly TimeSpan SendTimeout = TimeSpan.FromMinutes(1);
+        public readonly TimeSpan RecieveTimeout = TimeSpan.FromMinutes(10);
+        public readonly bool AllowCookies = false;
+        public readonly bool BypassProxyOnLocal = false;
+        public readonly int MaxBufferSize = 65536;
+        public readonly int MaxBufferPoolSize = 524288;
+        public readonly TransferMode TransferMode = TransferMode.Buffered;
+        public readonly Encoding TextEncoding = System.Text.Encoding.UTF8;
+        public readonly bool UseDefaultWebProxy = true;
+        public readonly int MaxDepth = 32;
+        public readonly int MaxStringContentLength = 8192;
+        public readonly int MaxArrayLength = 16384;
+        public readonly int MaxBytesPerRead = 4096;
+        public readonly int MaxNameTableCharCount = 8192;
+        public readonly HttpClientCredentialType ClientCredentialType = HttpClientCredentialType.None;
+        public readonly HttpProxyCredentialType ProxyCredentialType = HttpProxyCredentialType.None;
+        public readonly string Realm = "";
+        public readonly BasicHttpMessageCredentialType BasicClientCredentialType = BasicHttpMessageCredentialType.UserName;
 
         public DigiDocService(string serviceName, string endpointUrl, BasicHttpSecurityMode securityMode)
         {

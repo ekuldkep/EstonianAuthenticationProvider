@@ -41,7 +41,7 @@ namespace TestAuthPackage.Helpers
                 };
                 certificationInfoDto.IsCertificateValid = true;
                 certificationInfoDto.AuthenticationDto = authenticationDto;
-                certificationInfoDto.CertifikateChainStatus = CertificateChainStatusEnum.NotChecked; // kas muuta bool stringiks kuna mul on kolme väärtust vaja? 
+                certificationInfoDto.CertifikateChainStatus = CertificateChainStatusEnum.NotChecked; 
                 certificationInfoDto.CanRedirect = true;
                 certificationInfoDto.CertificateStatus = checkCertificateResponse.Status;
                 return certificationInfoDto;
@@ -91,10 +91,14 @@ namespace TestAuthPackage.Helpers
         //Makes Chains
         public virtual bool IsClientCertFromValidRoot(string clientCertificate, List<string> additionalCertificates, string baseCert)
         {
-            foreach (var additionalCertificate in additionalCertificates)
+            var convertedCertificates = ConvertAllCertificates(clientCertificate, additionalCertificates, baseCert);
+            var clietCert = convertedCertificates.ClientCertificate;
+            foreach (var additionalCertificate in convertedCertificates.AdditionalCertificates)
             {
-                List<string> certificationChain = new List<string> {additionalCertificate, baseCert};
-                var isCertfromValidRoot = VerifyCertificate(clientCertificate, certificationChain);
+                List<byte[]> middleCertsBytes = new List<byte[]>();
+                middleCertsBytes.Add(additionalCertificate);
+                middleCertsBytes.Add(convertedCertificates.BaseCertificate);
+                var isCertfromValidRoot = VerifyCertificate(clietCert, middleCertsBytes);
                 if (isCertfromValidRoot)
                 {
                     return true;
@@ -102,9 +106,7 @@ namespace TestAuthPackage.Helpers
             }
             return false;
         }
-
-        //Verifies current chain
-        public virtual bool VerifyCertificate(string primaryCertificate, List<string> additionalCertificates)
+        public virtual bool VerifyCertificate(byte[] primaryCertificate, List<byte[]> additionalCertificates)
         {
             var chain = new X509Chain();
 
@@ -137,6 +139,31 @@ namespace TestAuthPackage.Helpers
             return true;
         }
 
+        public virtual byte[] ConvertCertToByteArray(string certificate)
+        {
+            var convertedCert = Encoding.ASCII.GetBytes(certificate);
+            return convertedCert;
+        }
+
+        public virtual AllCertificates ConvertAllCertificates(string clientCert, List<string> middleCerts, string baseCert)
+        {
+            List<byte[]> middleCertsBytes = new List<byte[]>();
+
+            foreach (var middleCert in middleCerts)
+            {
+                var byteCertContainer = ConvertCertToByteArray(middleCert);
+                middleCertsBytes.Add(byteCertContainer);
+            }
+            var certificates = new AllCertificates()
+            {
+                ClientCertificate = ConvertCertToByteArray(clientCert),
+                BaseCertificate = ConvertCertToByteArray(baseCert),
+                AdditionalCertificates = middleCertsBytes
+            };
+
+            return certificates;
+        }
     }
-   
 }
+   
+

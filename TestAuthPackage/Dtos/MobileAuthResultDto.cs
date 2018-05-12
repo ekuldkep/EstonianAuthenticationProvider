@@ -7,7 +7,7 @@ namespace TestAuthPackage.Dtos
 {
     public class MobileAuthResultDto
     {
-        public SkMobileAuthenticateStatus SkMobileIdAuthenticateStatus { get; set; }
+        public string SkMobileIdAuthenticateStatus { get; set; }
         public string ChallengeID { get; set; }
         public int SessionCode { get; set; }
         public string IdentificationCode { get; set; }

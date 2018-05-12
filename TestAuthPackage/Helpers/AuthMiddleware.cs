@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
-using System.Web.Mvc;
 using TestAuthPackage.Constants;
 using BLL.Helpers;
 using Microsoft.AspNetCore.Http;

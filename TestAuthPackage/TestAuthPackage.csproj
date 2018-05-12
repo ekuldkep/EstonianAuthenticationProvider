@@ -5,17 +5,18 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
-    <Version>1.0.2</Version>
+    <Version>1.0.11</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.5" />
-    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.1.0-preview2-final" />
-    <PackageReference Include="Newtonsoft.Json" Version="8.0.3" />
-    <PackageReference Include="System.ServiceModel.Duplex" Version="4.5.0-preview2-26410-01" />
-    <PackageReference Include="System.ServiceModel.Http" Version="4.5.0-preview2-26410-01" />
-    <PackageReference Include="System.ServiceModel.NetTcp" Version="4.5.0-preview2-26410-01" />
-    <PackageReference Include="System.ServiceModel.Security" Version="4.5.0-preview2-26410-01" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.1.0-rc1-final" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.0-rc1-final" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="2.1.0-rc1-final" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="System.ServiceModel.Duplex" Version="4.5.0-rc1-26502-06" />
+    <PackageReference Include="System.ServiceModel.Http" Version="4.5.0-rc1-26502-06" />
+    <PackageReference Include="System.ServiceModel.NetTcp" Version="4.5.0-rc1-26502-06" />
+    <PackageReference Include="System.ServiceModel.Security" Version="4.5.0-rc1-26502-06" />
   </ItemGroup>
 
   <ItemGroup>

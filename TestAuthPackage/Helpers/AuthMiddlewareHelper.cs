@@ -11,23 +11,23 @@ using Microsoft.Extensions.Options;
 namespace TestAuthPackage.Helpers
 { 
     // You may need to install the Microsoft.AspNetCore.Http.Abstractions package into your project
-    public class AuthMiddleware
+    public class AuthMiddlewareHelper
     {
         public CertificateValidalidationConfig OptionsWithDelegateConfig;
 
-        public AuthMiddleware(IOptions<CertificateValidalidationConfig> options)
+        public AuthMiddlewareHelper(IOptions<CertificateValidalidationConfig> options)
         {
             OptionsWithDelegateConfig = options.Value;
         }
 
-        public AuthMiddleware()
+        public AuthMiddlewareHelper()
         {
             
         }
         //By default returns DigiDocService with test wsdl
-        public virtual DigiDocService GetDigiDocService()
+        public virtual DigiDocServiceHelper GetDigiDocService()
         {
-            return new DigiDocService();
+            return new DigiDocServiceHelper();
         }
 
         //Returns ertificationVerificationHelper

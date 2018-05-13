@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using BLL.Helpers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -10,25 +11,24 @@ using TestAuthPackage.Dtos;
 
 namespace TestAuthPackage.Helpers
 {
-    // TODO: should not named middleware, controller class should not have all the nice functions, separate them into a separate class
-    public class MobIdMiddleware : Controller
+    public class MobileIdControllerHelper : Controller
     {
-        public static string MobileIdAuthStatusKey = "MobileIdAuthStatus";
-        public static string BaseUri = "";
-        public MobileIdConstants MobileIdConstants;
+        public MobileIdConfiguration MobileIdConfiguration;
+        public MobileIdServiceConstants MobileIdServiceConstants;
 
-        public MobIdMiddleware(IOptions<MobileIdConstants> mobileIdConstants)
+        public MobileIdControllerHelper(IOptions<MobileIdServiceConstants> mobileIdServiceConstants, IOptions<MobileIdConfiguration> mobileIdConfiguration)
         {
-            MobileIdConstants = mobileIdConstants.Value;
+            MobileIdServiceConstants = mobileIdServiceConstants.Value;
+            MobileIdConfiguration = mobileIdConfiguration.Value;
         }
         public virtual MobileIdHelper GetClient()
         {
-            return new MobileIdHelper(GetDigiDocService(), MobileIdConstants);
+            return new MobileIdHelper(GetDigiDocService(), MobileIdServiceConstants);
         }
 
-        public virtual DigiDocService GetDigiDocService()
+        public virtual DigiDocServiceHelper GetDigiDocService()
         {
-            return new DigiDocService();
+            return new DigiDocServiceHelper();
         }
 
         public virtual string TrimPhoneNr(string phoneNumber)
@@ -44,26 +44,23 @@ namespace TestAuthPackage.Helpers
             return phoneNr;
         }
 
-        // TODO: change name, It does not login, it starts the flow
         // The untouched information is stored in session to prevent malicious attacks
-        public MobileAuthResultDto MobileIdLogin(string idCode, string phoneNr)
+        public virtual MobileAuthResultDto MobileIdLoginStart(string idCode, string phoneNr)
         {
             phoneNr = TrimPhoneNr(phoneNr);
-            var mobileIdResult = MobileIdLoginClient(idCode, phoneNr);
+            var mobileIdResult = MobileIdLoginRequest(idCode, phoneNr);
 
             var serialisedResult = JsonConvert.SerializeObject(mobileIdResult);
-            HttpContext.Session.SetString(MobileIdAuthStatusKey, serialisedResult);
+            HttpContext.Session.SetString(MobileIdConfiguration.MobileIdAuthStatusKey, serialisedResult);
 
             return mobileIdResult;
         }
 
-        // TODO: magic strings to config class enum or something
-        // TODO: is not a client, even though it uses a client, lets rename it
-        private MobileAuthResultDto MobileIdLoginClient(string idCode, string phoneNr)
+        public virtual MobileAuthResultDto MobileIdLoginRequest(string idCode, string phoneNr)
         {
             var mobileIdResult = GetClient().MobileIdAuthenticate(idCode, phoneNr);
 
-            var isOk = mobileIdResult.SkMobileIdAuthenticateStatus == "OK";
+            var isOk = mobileIdResult.SkMobileIdAuthenticateStatus == CertificateStatusConstants.MobileIdStatusOk;
 
             mobileIdResult.AuthenticationResultType =
                 isOk ? AuthenticationResultType.Pending : AuthenticationResultType.Failed;
@@ -73,9 +70,9 @@ namespace TestAuthPackage.Helpers
 
         // Doesn't need any arguments as the session holds the IdAuth session also
         // without a session null is returned
-        public MobileAuthResultDto PollMobileIdLogInStatus()
+        public virtual MobileAuthResultDto PollMobileIdLogInStatus()
         {
-            var sessionValueString = HttpContext.Session.GetString(MobileIdAuthStatusKey);
+            var sessionValueString = HttpContext.Session.GetString(MobileIdConfiguration.MobileIdAuthStatusKey);
 
             var mobileAuthTrustedInitialData = JsonConvert.DeserializeObject<MobileAuthResultDto>(sessionValueString);
 
@@ -95,28 +92,27 @@ namespace TestAuthPackage.Helpers
             // polling has finished
             if (authStatus != AuthenticationResultType.Pending)
             {
-                HttpContext.Session.Remove(MobileIdAuthStatusKey);
+                HttpContext.Session.Remove(MobileIdConfiguration.MobileIdAuthStatusKey);
             }
 
             return mobileAuthCurrentStatus;
         }
 
-        public string GenerateAuthUrl(MobileAuthResultDto authResult)
+        public virtual string GenerateAuthUrl(MobileAuthResultDto authResult)
         {
-            string token = "this will be crypted and contains all the necessray data like in IdCard auth";
-            return $"{BaseUri}{token}";
+            string token = SecurityHelper.EncryptString(authResult.PropertyValuesCommaSeparated(), EncryptionKey.Key());
+            return $"{MobileIdConfiguration.RedirectUrl}{token}";
         }
 
-        // TODO: magic strings
-        private MobileAuthResultDto GetMobileIdAuthenticateStatus(MobileAuthResultDto mobileAuthTrustedInitialData)
+        public virtual MobileAuthResultDto GetMobileIdAuthenticateStatus(MobileAuthResultDto mobileAuthTrustedInitialData)
         {
             var result = GetClient().GetMobileIdAuthenticateStatus(mobileAuthTrustedInitialData.SessionCode);
 
-            if (result == "USER_AUTHENTICATED")
+            if (result == MobileIdResultConstants.UserAuthenticated)
             {
                 mobileAuthTrustedInitialData.AuthenticationResultType = AuthenticationResultType.Succeeded;
             }
-            else if (result == "OUTSTANDING_TRANSACTION")
+            else if (result == MobileIdResultConstants.OutstandingTransaction)
             {
                 mobileAuthTrustedInitialData.AuthenticationResultType = AuthenticationResultType.Pending;
             }
@@ -128,9 +124,9 @@ namespace TestAuthPackage.Helpers
             return mobileAuthTrustedInitialData;
         }
 
-        public JsonResult InitilizeMobileAuthJson(string idCode, string phoneNr)
+        public virtual JsonResult InitilizeMobileAuthJson(string idCode, string phoneNr)
         {
-            var mobileAuthResult = MobileIdLogin(idCode, phoneNr);
+            var mobileAuthResult = MobileIdLoginStart(idCode, phoneNr);
             return Json(new
             {
                 challenge=mobileAuthResult.Challenge,
@@ -138,7 +134,7 @@ namespace TestAuthPackage.Helpers
             });
         }
 
-        public JsonResult PollMobileAuthStatusJson()
+        public virtual JsonResult PollMobileAuthStatusJson()
         {
             var mobileAuthResult = PollMobileIdLogInStatus();
             if (mobileAuthResult == null)
@@ -150,6 +146,7 @@ namespace TestAuthPackage.Helpers
             }
 
             string url = GenerateAuthUrl(mobileAuthResult);
+
             return Json(new
             {
                 url=url,

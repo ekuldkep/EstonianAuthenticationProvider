@@ -10,16 +10,22 @@ namespace TestAuthPackage.Dtos
         public string SkMobileIdAuthenticateStatus { get; set; }
         public string ChallengeID { get; set; }
         public int SessionCode { get; set; }
-        public string IdentificationCode { get; set; }
-        public string GivenName { get; set; }
-        public string SurName { get; set; }
+        public string IdCode { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string UserCountry { get; set; }
         public string UserCN { get; set; }
         public string CertificateData { get; set; }
         public string Challenge { get; set; }
-        public string RevokationData { get; set; }
+        public string RevocationData { get; set; }
         public AuthenticationResultType AuthenticationResultType { get; set; }
         public string Message { get; set; }
         public bool IsMobileIdValid { get; set; }
+
+        public string PropertyValuesCommaSeparated()
+        {
+            return
+                $"{IdCode},{FirstName},{LastName},{UserCountry},{UserCN},{RevocationData}";
+        }
     }
 }

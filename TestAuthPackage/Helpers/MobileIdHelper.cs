@@ -11,43 +11,43 @@ namespace TestAuthPackage.Helpers
 {
     public class MobileIdHelper
     {
-        public MobileIdConstants MobileIdConstants;
-        public DigiDocService DigiDocService { get; set; }
+        public MobileIdServiceConstants MobileIdServiceConstants;
+        public DigiDocServiceHelper DigiDocService { get; set; }
 
-        public MobileIdHelper(DigiDocService digiDocService, MobileIdConstants mobileIdConstants)
+        public MobileIdHelper(DigiDocServiceHelper digiDocService, MobileIdServiceConstants mobileIdServiceConstants)
         {
             DigiDocService = digiDocService;
-            MobileIdConstants = mobileIdConstants;
+            MobileIdServiceConstants = mobileIdServiceConstants;
         }
         public virtual MobileAuthResultDto MobileIdAuthenticate(string idCode, string phoneNr)
         {
             var digiDocService = DigiDocService.ReturnDigiDocService();
             var result = new MobileAuthResultDto();
             var response = digiDocService.MobileAuthenticateAsync(new MobileAuthenticateRequest(idCode,
-                MobileIdConstants.CountryCode,
+                MobileIdServiceConstants.CountryCode,
                 phoneNr,
-                MobileIdConstants.Language,
-                MobileIdConstants.ServiceName,
-                MobileIdConstants.MessageToDisplay,
-                MobileIdConstants.SpChallange,
-                MobileIdConstants.MessagingMode,
-                MobileIdConstants.AsyncConfiguration,
-                MobileIdConstants.ReturnCertData,
-                MobileIdConstants.ReturnRevocationData
+                MobileIdServiceConstants.Language,
+                MobileIdServiceConstants.ServiceName,
+                MobileIdServiceConstants.MessageToDisplay,
+                MobileIdServiceConstants.SpChallange,
+                MobileIdServiceConstants.MessagingMode,
+                MobileIdServiceConstants.AsyncConfiguration,
+                MobileIdServiceConstants.ReturnCertData,
+                MobileIdServiceConstants.ReturnRevocationData
                  ));
 
             if (response.Result.Status == CertificateStatusConstants.MobileIdStatusOk)
             {
                 result.SkMobileIdAuthenticateStatus = response.Result.Status;
                 result.ChallengeID = response.Result.ChallengeID;
-                result.IdentificationCode = response.Result.UserIDCode;
+                result.IdCode = response.Result.UserIDCode;
                 result.SessionCode = response.Result.Sesscode;
-                result.GivenName = response.Result.UserGivenname;
-                result.SurName = response.Result.UserSurname;
+                result.FirstName = response.Result.UserGivenname;
+                result.LastName = response.Result.UserSurname;
                 result.UserCountry = response.Result.UserCountry;
                 result.CertificateData = response.Result.CertificateData;
                 result.Challenge = response.Result.Challenge;
-                result.RevokationData = response.Result.RevocationData;
+                result.RevocationData = response.Result.RevocationData;
                 result.UserCN = response.Result.UserCN;
                 return result;
             }

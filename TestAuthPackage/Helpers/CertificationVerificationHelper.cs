@@ -13,8 +13,8 @@ namespace TestAuthPackage.Helpers
 {
     public class CertificationVerificationHelper
     {
-        public DigiDocService DigiDocService;
-        public CertificationVerificationHelper(DigiDocService digiDocService)
+        public DigiDocServiceHelper DigiDocService;
+        public CertificationVerificationHelper(DigiDocServiceHelper digiDocService)
         {
             DigiDocService = digiDocService;
         }

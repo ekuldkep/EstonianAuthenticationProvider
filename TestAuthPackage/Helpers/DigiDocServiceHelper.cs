@@ -6,7 +6,7 @@ using DigiDocService;
 
 namespace TestAuthPackage.Helpers
 {
-    public class DigiDocService
+    public class DigiDocServiceHelper
     {
         public string ServiceName = "DigiDocService";
         public string EndpointUrl = "https://tsp.demo.sk.ee/dds.wsdl";
@@ -32,14 +32,14 @@ namespace TestAuthPackage.Helpers
         public string Realm = "";
         public BasicHttpMessageCredentialType BasicClientCredentialType = BasicHttpMessageCredentialType.UserName;
 
-        public DigiDocService(string serviceName, string endpointUrl, BasicHttpSecurityMode securityMode)
+        public DigiDocServiceHelper(string serviceName, string endpointUrl, BasicHttpSecurityMode securityMode)
         {
             ServiceName = serviceName;
             EndpointUrl = endpointUrl;
             SecurityMode = securityMode;
         }
 
-        public DigiDocService()
+        public DigiDocServiceHelper()
         {
 
         }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TestAuthPackage.Constants
 {
-    public class MobileIdConstants
+    public class MobileIdServiceConstants
     {
         public string CountryCode { get; set; } = "";
         public string Language { get; set; } = "EST";

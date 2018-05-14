@@ -7,7 +7,7 @@ namespace TestAuthPackage.Constants
 {
     public class DigiDocServiceVariables
     {
-        public string ServiceName { get; set; } = "DigiDocService";
+        public string ServiceName { get; set; } = "DigiDocServiceHelper";
         public string EndpointUrl { get; set; } = "https://tsp.demo.sk.ee/dds.wsdl";
         public BasicHttpSecurityMode SecurityMode { get; set; } = BasicHttpSecurityMode.Transport;
         public TimeSpan CloseTimeout { get; set; } = TimeSpan.FromMinutes(1);

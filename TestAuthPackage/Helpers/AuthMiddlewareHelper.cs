@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using TestAuthPackage.Constants;
-using BLL.Helpers;
 using Microsoft.AspNetCore.Http;
 using TestAuthPackage.Dtos;
 using Microsoft.Extensions.Options;
@@ -13,21 +12,13 @@ namespace TestAuthPackage.Helpers
     // You may need to install the Microsoft.AspNetCore.Http.Abstractions package into your project
     public class AuthMiddlewareHelper
     {
-        public CertificateValidalidationConfig OptionsWithDelegateConfig;
+        public CertificateValidalidationConfig CertificateValidalidationConfig;
+        public DigiDocServiceVariables DigiDocServiceVariables;
 
-        public AuthMiddlewareHelper(IOptions<CertificateValidalidationConfig> options)
-        {
-            OptionsWithDelegateConfig = options.Value;
-        }
-
-        public AuthMiddlewareHelper()
-        {
-            
-        }
-        //By default returns DigiDocService with test wsdl
+        //By default returns DigiDocServiceHelper with test wsdl
         public virtual DigiDocServiceHelper GetDigiDocService()
         {
-            return new DigiDocServiceHelper();
+            return new DigiDocServiceHelper(DigiDocServiceVariables);
         }
 
         //Returns ertificationVerificationHelper
@@ -40,13 +31,13 @@ namespace TestAuthPackage.Helpers
         public virtual async Task<CertificationInfoDto> CheckCertificationInfo(HttpContext httpContext, string clientCertificate)
         {
             var client = GetClient();
-            return await client.CertificationInfoAndChain(clientCertificate, OptionsWithDelegateConfig.MiddleCertifications, OptionsWithDelegateConfig.BaseCert);
+            return await client.CertificationInfoAndChain(clientCertificate, CertificateValidalidationConfig.MiddleCertifications, CertificateValidalidationConfig.BaseCert);
         }
 
         //Is useful for testing, does not have to use certificate
         public virtual async Task<string> GetCertifikateSettings(HttpContext httpContext)
         {
-            return await Task.FromResult(OptionsWithDelegateConfig.Thumbprint);
+            return await Task.FromResult(CertificateValidalidationConfig.Thumbprint);
         }
 
         //Default value, can be used if server is IIS
@@ -96,7 +87,7 @@ namespace TestAuthPackage.Helpers
 
                     if (!httpContext.Request.QueryString.ToString().Contains("?token="))
                     {
-                        var newPath = OptionsWithDelegateConfig.RedirectUrl + $"?token={token}"; 
+                        var newPath = CertificateValidalidationConfig.RedirectUrl + $"?token={token}"; 
                         httpContext.Response.Redirect(newPath, false);
                     }
                 }

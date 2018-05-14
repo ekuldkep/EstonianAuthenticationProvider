@@ -80,7 +80,7 @@ namespace TestAuthPackage.Helpers
             return await CertificationInfo(clientCertificate);
         }
 
-        //Does request to DigiDocService
+        //Does request to DigiDocServiceHelper
         public virtual async Task<CertificationInfoDto> CertificationInfo(string clientCertificate)
         {
             var cerClient = DigiDocService.ReturnDigiDocService();

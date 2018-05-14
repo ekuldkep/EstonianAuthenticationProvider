@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using BLL.Helpers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -15,12 +14,8 @@ namespace TestAuthPackage.Helpers
     {
         public MobileIdConfiguration MobileIdConfiguration;
         public MobileIdServiceConstants MobileIdServiceConstants;
+        public DigiDocServiceVariables DigiDocServiceVariables;
 
-        public MobileIdControllerHelper(IOptions<MobileIdServiceConstants> mobileIdServiceConstants, IOptions<MobileIdConfiguration> mobileIdConfiguration)
-        {
-            MobileIdServiceConstants = mobileIdServiceConstants.Value;
-            MobileIdConfiguration = mobileIdConfiguration.Value;
-        }
         public virtual MobileIdHelper GetClient()
         {
             return new MobileIdHelper(GetDigiDocService(), MobileIdServiceConstants);
@@ -28,7 +23,7 @@ namespace TestAuthPackage.Helpers
 
         public virtual DigiDocServiceHelper GetDigiDocService()
         {
-            return new DigiDocServiceHelper();
+            return new DigiDocServiceHelper(DigiDocServiceVariables);
         }
 
         public virtual string TrimPhoneNr(string phoneNumber)
@@ -45,14 +40,14 @@ namespace TestAuthPackage.Helpers
         }
 
         // The untouched information is stored in session to prevent malicious attacks
-        public virtual MobileAuthResultDto MobileIdLoginStart(string idCode, string phoneNr)
+        public virtual MobileAuthResultDto MobileIdLoginStart(string idCode, string phoneNr, string secret)
         {
             phoneNr = TrimPhoneNr(phoneNr);
             var mobileIdResult = MobileIdLoginRequest(idCode, phoneNr);
 
             var serialisedResult = JsonConvert.SerializeObject(mobileIdResult);
             HttpContext.Session.SetString(MobileIdConfiguration.MobileIdAuthStatusKey, serialisedResult);
-
+            HttpContext.Session.SetString("onetime_use_secret", secret);
             return mobileIdResult;
         }
 
@@ -100,7 +95,8 @@ namespace TestAuthPackage.Helpers
 
         public virtual string GenerateAuthUrl(MobileAuthResultDto authResult)
         {
-            string token = SecurityHelper.EncryptString(authResult.PropertyValuesCommaSeparated(), EncryptionKey.Key());
+            var secret = HttpContext.Session.GetString("onetime_use_secret");
+            string token = SecurityHelper.EncryptString(authResult.PropertyValuesCommaSeparated(secret), EncryptionKey.Key());
             return $"{MobileIdConfiguration.RedirectUrl}{token}";
         }
 
@@ -120,23 +116,26 @@ namespace TestAuthPackage.Helpers
             {
                 mobileAuthTrustedInitialData.AuthenticationResultType = AuthenticationResultType.Failed;
             }
+
             mobileAuthTrustedInitialData.Message = result;
             return mobileAuthTrustedInitialData;
         }
 
-        public virtual JsonResult InitilizeMobileAuthJson(string idCode, string phoneNr)
+        public virtual JsonResult InitilizeMobileAuthJson(string idCode, string phoneNr, string secret)
         {
-            var mobileAuthResult = MobileIdLoginStart(idCode, phoneNr);
+            var mobileAuthResult = MobileIdLoginStart(idCode, phoneNr, secret);
             return Json(new
             {
                 challenge=mobileAuthResult.Challenge,
                 status=mobileAuthResult.AuthenticationResultType,
+                exceptionCode = mobileAuthResult.ErrorCode
             });
         }
 
         public virtual JsonResult PollMobileAuthStatusJson()
         {
             var mobileAuthResult = PollMobileIdLogInStatus();
+            // no session found
             if (mobileAuthResult == null)
             {
                 return Json(new
@@ -145,11 +144,19 @@ namespace TestAuthPackage.Helpers
                 });
             }
 
-            string url = GenerateAuthUrl(mobileAuthResult);
+            if (mobileAuthResult.AuthenticationResultType == AuthenticationResultType.Succeeded)
+            {
+                string url = GenerateAuthUrl(mobileAuthResult);
+                return Json(new
+                {
+                    url = url,
+                    status = mobileAuthResult.AuthenticationResultType,
+                });
+            }
 
             return Json(new
             {
-                url=url,
+                status = mobileAuthResult.AuthenticationResultType,
             });
         }
     }

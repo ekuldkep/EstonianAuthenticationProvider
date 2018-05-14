@@ -5,12 +5,12 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
-    <Version>1.0.11</Version>
+    <Version>1.0.16</Version>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.1.0-rc1-final" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.0-rc1-final" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.2" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="2.1.0-rc1-final" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="System.ServiceModel.Duplex" Version="4.5.0-rc1-26502-06" />

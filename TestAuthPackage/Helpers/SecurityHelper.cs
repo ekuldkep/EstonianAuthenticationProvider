@@ -5,7 +5,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace BLL.Helpers
+namespace TestAuthPackage.Helpers
 {
     public static class SecurityHelper
     {

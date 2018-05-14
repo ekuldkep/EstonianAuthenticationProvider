@@ -21,11 +21,12 @@ namespace TestAuthPackage.Dtos
         public AuthenticationResultType AuthenticationResultType { get; set; }
         public string Message { get; set; }
         public bool IsMobileIdValid { get; set; }
+        public string ErrorCode { get; set; }
 
-        public string PropertyValuesCommaSeparated()
+        public string PropertyValuesCommaSeparated(string secret)
         {
             return
-                $"{IdCode},{FirstName},{LastName},{UserCountry},{UserCN},{RevocationData}";
+                $"{secret},{IdCode},{FirstName},{LastName},{UserCountry},{UserCN},{RevocationData}";
         }
     }
 }

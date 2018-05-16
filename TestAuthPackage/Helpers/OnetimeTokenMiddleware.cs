@@ -30,10 +30,9 @@ namespace TestAuthPackage.Helpers
 
 
     // Extension method used to add the middleware to the HTTP request pipeline.
-    public static class IdAuthMiddlewareExtensions
+    public static class OnetimeTokenMiddlewareExtensions
     {
-
-        public static IApplicationBuilder UseIdAuthMiddleware(this IApplicationBuilder builder)
+        public static IApplicationBuilder UseOnetimeTokenMiddleware(this IApplicationBuilder builder)
         {
             return builder.UseMiddleware<OnetimeTokenMiddleware>();
         }

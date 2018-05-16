@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using TestAuthPackage.Constants;
 
 namespace TestAuthPackage.Dtos
 {
@@ -17,11 +18,15 @@ namespace TestAuthPackage.Dtos
         public string Status { get; set; }
         public string RevocationData { get; set; }
         public string EnhancedKeyUsage { get; set; }
-
-        public string PropertyValuesCommaSeparated()
-        {
-            return
-                $"{IdCode},{FirstName},{LastName},{Status},{UserCountry},{UserOrganisation},{UserCN},{IssuerCN},{KeyUsage},{RevocationData},{EnhancedKeyUsage}";
-        }
+        public string Secret { get; set; }
+        public string SkMobileIdAuthenticateStatus { get; set; }
+        public string ChallengeID { get; set; }
+        public int SessionCode { get; set; }
+        public string CertificateData { get; set; }
+        public string Challenge { get; set; }
+        public AuthenticationResultType AuthenticationResultType { get; set; }
+        public string Message { get; set; }
+        public bool IsMobileIdValid { get; set; }
+        public string ErrorCode { get; set; }
     }
 }

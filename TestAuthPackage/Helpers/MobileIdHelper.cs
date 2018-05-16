@@ -20,10 +20,10 @@ namespace TestAuthPackage.Helpers
             DigiDocServiceHelper = digiDocServiceHelper;
             MobileIdServiceConstants = mobileIdServiceConstants;
         }
-        public virtual MobileAuthResultDto MobileIdAuthenticate(string idCode, string phoneNr)
+        public virtual AuthenticationDto MobileIdAuthenticate(string idCode, string phoneNr)
         {
             var digiDocService = DigiDocServiceHelper.ReturnDigiDocService();
-            var result = new MobileAuthResultDto();
+            var result = new AuthenticationDto();
             try
             {
                 var response = digiDocService.MobileAuthenticateAsync(new MobileAuthenticateRequest(idCode,

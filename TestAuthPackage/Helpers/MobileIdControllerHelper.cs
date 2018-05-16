@@ -40,18 +40,17 @@ namespace TestAuthPackage.Helpers
         }
 
         // The untouched information is stored in session to prevent malicious attacks
-        public virtual MobileAuthResultDto MobileIdLoginStart(string idCode, string phoneNr, string secret)
+        public virtual AuthenticationDto MobileIdLoginStart(string idCode, string phoneNr)
         {
             phoneNr = TrimPhoneNr(phoneNr);
             var mobileIdResult = MobileIdLoginRequest(idCode, phoneNr);
 
             var serialisedResult = JsonConvert.SerializeObject(mobileIdResult);
             HttpContext.Session.SetString(MobileIdConfiguration.MobileIdAuthStatusKey, serialisedResult);
-            HttpContext.Session.SetString("onetime_use_secret", secret);
             return mobileIdResult;
         }
 
-        public virtual MobileAuthResultDto MobileIdLoginRequest(string idCode, string phoneNr)
+        public virtual AuthenticationDto MobileIdLoginRequest(string idCode, string phoneNr)
         {
             var mobileIdResult = GetClient().MobileIdAuthenticate(idCode, phoneNr);
 
@@ -65,11 +64,11 @@ namespace TestAuthPackage.Helpers
 
         // Doesn't need any arguments as the session holds the IdAuth session also
         // without a session null is returned
-        public virtual MobileAuthResultDto PollMobileIdLogInStatus()
+        public virtual AuthenticationDto PollMobileIdLogInStatus()
         {
             var sessionValueString = HttpContext.Session.GetString(MobileIdConfiguration.MobileIdAuthStatusKey);
 
-            var mobileAuthTrustedInitialData = JsonConvert.DeserializeObject<MobileAuthResultDto>(sessionValueString);
+            var mobileAuthTrustedInitialData = JsonConvert.DeserializeObject<AuthenticationDto>(sessionValueString);
 
             // we dont aknowledge polling without session
             if (mobileAuthTrustedInitialData == null)
@@ -93,14 +92,19 @@ namespace TestAuthPackage.Helpers
             return mobileAuthCurrentStatus;
         }
 
-        public virtual string GenerateAuthUrl(MobileAuthResultDto authResult)
+        public virtual string GenerateAuthUrl(AuthenticationDto authResultDto)
         {
-            var secret = HttpContext.Session.GetString("onetime_use_secret");
-            string token = SecurityHelper.EncryptString(authResult.PropertyValuesCommaSeparated(secret), EncryptionKey.Key());
+            var secret = HttpContext.Session.GetString(SecurityConstants.ClientSecret);
+
+            authResultDto.Secret = secret;
+
+            var serialisedResult = JsonConvert.SerializeObject(authResultDto);
+
+            string token = SecurityHelper.EncryptString(serialisedResult, EncryptionKey.Key());
             return $"{MobileIdConfiguration.RedirectUrl}{token}";
         }
 
-        public virtual MobileAuthResultDto GetMobileIdAuthenticateStatus(MobileAuthResultDto mobileAuthTrustedInitialData)
+        public virtual AuthenticationDto GetMobileIdAuthenticateStatus(AuthenticationDto mobileAuthTrustedInitialData)
         {
             var result = GetClient().GetMobileIdAuthenticateStatus(mobileAuthTrustedInitialData.SessionCode);
 
@@ -121,12 +125,12 @@ namespace TestAuthPackage.Helpers
             return mobileAuthTrustedInitialData;
         }
 
-        public virtual JsonResult InitilizeMobileAuthJson(string idCode, string phoneNr, string secret)
+        public virtual JsonResult InitilizeMobileAuthJson(string idCode, string phoneNr)
         {
-            var mobileAuthResult = MobileIdLoginStart(idCode, phoneNr, secret);
+            var mobileAuthResult = MobileIdLoginStart(idCode, phoneNr);
             return Json(new
             {
-                challenge=mobileAuthResult.Challenge,
+                challenge=mobileAuthResult.ChallengeID,
                 status=mobileAuthResult.AuthenticationResultType,
                 exceptionCode = mobileAuthResult.ErrorCode
             });

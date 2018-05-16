@@ -4,8 +4,10 @@ using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using TestAuthPackage.Constants;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Extensions;
 using TestAuthPackage.Dtos;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 
 namespace TestAuthPackage.Helpers
 { 
@@ -64,9 +66,11 @@ namespace TestAuthPackage.Helpers
         }
 
         //Default encryption can be overwritten with custom encryption
-        public virtual string EncryptResponse(AuthenticationDto authentication)
+        public virtual string EncryptResponse(AuthenticationDto authenticationDto)
         {
-            return SecurityHelper.EncryptString(authentication.PropertyValuesCommaSeparated(),
+            var serialisedResult = JsonConvert.SerializeObject(authenticationDto);
+
+            return SecurityHelper.EncryptString(serialisedResult,
                 EncryptionKey.Key());
         }
 
@@ -74,6 +78,7 @@ namespace TestAuthPackage.Helpers
         public async Task InvokeCert(HttpContext httpContext)
         {
             var certificate = await GetCertificate(httpContext);
+            var secret = httpContext.Request.Query[SecurityConstants.ClientSecret].ToString();
 
             if (!string.IsNullOrEmpty(certificate))
             {
@@ -81,6 +86,9 @@ namespace TestAuthPackage.Helpers
 
                 if (certificationInfo.Result.CanRedirect)
                 {
+                    var authenticationDto = certificationInfo.Result.AuthenticationDto;
+                    authenticationDto.Secret = secret;
+
                     var encryptedCertInfo = EncryptResponse(certificationInfo.Result.AuthenticationDto);
 
                     var token = System.Net.WebUtility.UrlEncode(encryptedCertInfo);

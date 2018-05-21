@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TestAuthPackage.Constants
+namespace EstonianAuthenticationProvider.Constants
 {
-    public enum AuthenticationResultType
+    public enum MobileIdAuthResultType
     {
         Succeeded = 1,
         InvalidCertificate = 2,

@@ -4,25 +4,25 @@ using System.Linq;
 using System.ServiceModel;
 using System.Text;
 using DigiDocService;
+using EstonianAuthenticationProvider.Constants;
+using EstonianAuthenticationProvider.Dtos;
 using Microsoft.Extensions.Options;
-using TestAuthPackage.Constants;
-using TestAuthPackage.Dtos;
 
-namespace TestAuthPackage.Helpers
+namespace EstonianAuthenticationProvider.Helpers
 {
     public class MobileIdHelper
     {
-        public MobileIdServiceConstants MobileIdServiceConstants;
-        public DigiDocServiceHelper DigiDocServiceHelper { get; set; }
+        public MobileIdHelperConfig MobileIdServiceConstants;
+        public DigiDocServiceHelper DigiDocService { get; set; }
 
-        public MobileIdHelper(DigiDocServiceHelper digiDocServiceHelper, MobileIdServiceConstants mobileIdServiceConstants)
+        public MobileIdHelper(DigiDocServiceHelper digiDocServiceHelper, MobileIdHelperConfig mobileIdServiceConstants)
         {
-            DigiDocServiceHelper = digiDocServiceHelper;
+            DigiDocService = digiDocServiceHelper;
             MobileIdServiceConstants = mobileIdServiceConstants;
         }
         public virtual AuthenticationDto MobileIdAuthenticate(string idCode, string phoneNr)
         {
-            var digiDocService = DigiDocServiceHelper.ReturnDigiDocService();
+            var digiDocService = DigiDocService.ReturnDigiDocService();
             var result = new AuthenticationDto();
             try
             {
@@ -65,10 +65,10 @@ namespace TestAuthPackage.Helpers
 
         public virtual string GetMobileIdAuthenticateStatus(int sessionCode)
         {
-            var digiDocService = DigiDocServiceHelper.ReturnDigiDocService();
+            var digiDocService = DigiDocService.ReturnDigiDocService();
             var response = digiDocService.GetMobileAuthenticateStatusAsync(new GetMobileAuthenticateStatusRequest(sessionCode, false));
             return response.Result.Status;
         }
-        
+
     }
 }

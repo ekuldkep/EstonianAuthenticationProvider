@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TestAuthPackage.Constants
+namespace EstonianAuthenticationProvider.Constants
 {
-    public class MobileIdConfiguration
+    public class MobileIdConfig
     {
         public string MobileIdAuthStatusKey { get; set; } = "MobileIdAuthStatus";
         public string RedirectUrl { get; set; }
+        public string Key { get; set; }
+
     }
 }

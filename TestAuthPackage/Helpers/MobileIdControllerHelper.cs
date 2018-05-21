@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using EstonianAuthenticationProvider.Constants;
+using EstonianAuthenticationProvider.Dtos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-using TestAuthPackage.Constants;
-using TestAuthPackage.Dtos;
 
-namespace TestAuthPackage.Helpers
+namespace EstonianAuthenticationProvider.Helpers
 {
     public class MobileIdControllerHelper : Controller
     {
-        public MobileIdConfiguration MobileIdConfiguration;
-        public MobileIdServiceConstants MobileIdServiceConstants;
-        public DigiDocServiceVariables DigiDocServiceVariables;
+        public MobileIdConfig MobileIdConfiguration;
+        public MobileIdHelperConfig MobileIdServiceConstants;
+        public DigiDocServiceConfig DigiDocServiceConfig;
 
         public virtual MobileIdHelper GetClient()
         {
@@ -23,7 +23,7 @@ namespace TestAuthPackage.Helpers
 
         public virtual DigiDocServiceHelper GetDigiDocService()
         {
-            return new DigiDocServiceHelper(DigiDocServiceVariables);
+            return new DigiDocServiceHelper(DigiDocServiceConfig);
         }
 
         public virtual string TrimPhoneNr(string phoneNumber)
@@ -56,8 +56,8 @@ namespace TestAuthPackage.Helpers
 
             var isOk = mobileIdResult.SkMobileIdAuthenticateStatus == CertificateStatusConstants.MobileIdStatusOk;
 
-            mobileIdResult.AuthenticationResultType =
-                isOk ? AuthenticationResultType.Pending : AuthenticationResultType.Failed;
+            mobileIdResult.MobileIdAuthResultType =
+                isOk ? MobileIdAuthResultType.Pending : MobileIdAuthResultType.Failed;
             mobileIdResult.IsMobileIdValid = isOk;
             return mobileIdResult;
         }
@@ -76,15 +76,15 @@ namespace TestAuthPackage.Helpers
                 return null;
             }
 
-            // return the dto with the arg AuthenticationResultType set to AuthenticationResultType.Failed when failed otherwise when success AuthenticationResultType.Succeeded
+            // return the dto with the arg MobileIdAuthResultType set to MobileIdAuthResultType.Failed when failed otherwise when success MobileIdAuthResultType.Succeeded
             var mobileAuthCurrentStatus = GetMobileIdAuthenticateStatus(
                 mobileAuthTrustedInitialData
             );
 
-            var authStatus = mobileAuthTrustedInitialData.AuthenticationResultType;
+            var authStatus = mobileAuthTrustedInitialData.MobileIdAuthResultType;
 
             // polling has finished
-            if (authStatus != AuthenticationResultType.Pending)
+            if (authStatus != MobileIdAuthResultType.Pending)
             {
                 HttpContext.Session.Remove(MobileIdConfiguration.MobileIdAuthStatusKey);
             }
@@ -98,9 +98,9 @@ namespace TestAuthPackage.Helpers
 
             authResultDto.Secret = secret;
 
-            var serialisedResult = JsonConvert.SerializeObject(authResultDto);
+            var serialisedResult = authResultDto.Serialize();
 
-            string token = SecurityHelper.EncryptString(serialisedResult, EncryptionKey.Key());
+            string token = SecurityHelper.EncryptString(serialisedResult, MobileIdConfiguration.Key);
             return $"{MobileIdConfiguration.RedirectUrl}{token}";
         }
 
@@ -110,15 +110,15 @@ namespace TestAuthPackage.Helpers
 
             if (result == MobileIdResultConstants.UserAuthenticated)
             {
-                mobileAuthTrustedInitialData.AuthenticationResultType = AuthenticationResultType.Succeeded;
+                mobileAuthTrustedInitialData.MobileIdAuthResultType = MobileIdAuthResultType.Succeeded;
             }
             else if (result == MobileIdResultConstants.OutstandingTransaction)
             {
-                mobileAuthTrustedInitialData.AuthenticationResultType = AuthenticationResultType.Pending;
+                mobileAuthTrustedInitialData.MobileIdAuthResultType = MobileIdAuthResultType.Pending;
             }
             else
             {
-                mobileAuthTrustedInitialData.AuthenticationResultType = AuthenticationResultType.Failed;
+                mobileAuthTrustedInitialData.MobileIdAuthResultType = MobileIdAuthResultType.Failed;
             }
 
             mobileAuthTrustedInitialData.Message = result;
@@ -130,8 +130,8 @@ namespace TestAuthPackage.Helpers
             var mobileAuthResult = MobileIdLoginStart(idCode, phoneNr);
             return Json(new
             {
-                challenge=mobileAuthResult.ChallengeID,
-                status=mobileAuthResult.AuthenticationResultType,
+                challenge = mobileAuthResult.ChallengeID,
+                status = mobileAuthResult.MobileIdAuthResultType,
                 exceptionCode = mobileAuthResult.ErrorCode
             });
         }
@@ -144,23 +144,23 @@ namespace TestAuthPackage.Helpers
             {
                 return Json(new
                 {
-                    status=AuthenticationResultType.Failed,
+                    status = MobileIdAuthResultType.Failed,
                 });
             }
 
-            if (mobileAuthResult.AuthenticationResultType == AuthenticationResultType.Succeeded)
+            if (mobileAuthResult.MobileIdAuthResultType == MobileIdAuthResultType.Succeeded)
             {
                 string url = GenerateAuthUrl(mobileAuthResult);
                 return Json(new
                 {
                     url = url,
-                    status = mobileAuthResult.AuthenticationResultType,
+                    status = mobileAuthResult.MobileIdAuthResultType,
                 });
             }
 
             return Json(new
             {
-                status = mobileAuthResult.AuthenticationResultType,
+                status = mobileAuthResult.MobileIdAuthResultType,
             });
         }
     }

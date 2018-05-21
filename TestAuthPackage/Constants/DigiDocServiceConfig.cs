@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.ServiceModel;
 using System.Text;
 
-namespace TestAuthPackage.Constants
+namespace EstonianAuthenticationProvider.Constants
 {
-    public class DigiDocServiceVariables
+    public class DigiDocServiceConfig
     {
-        public string ServiceName { get; set; } = "DigiDocServiceHelper";
+        public string ServiceName { get; set; } = "DigiDocService";
         public string EndpointUrl { get; set; } = "https://tsp.demo.sk.ee/dds.wsdl";
         public BasicHttpSecurityMode SecurityMode { get; set; } = BasicHttpSecurityMode.Transport;
         public TimeSpan CloseTimeout { get; set; } = TimeSpan.FromMinutes(1);

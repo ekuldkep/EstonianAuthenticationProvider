@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TestAuthPackage.Dtos
+namespace EstonianAuthenticationProvider.Dtos
 {
     public class AllCertificates
     {

@@ -3,10 +3,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
-using TestAuthPackage.Constants;
-using TestAuthPackage.Dtos;
+using EstonianAuthenticationProvider.Dtos;
+using EstonianAuthenticationProvider.Constants;
 
-namespace TestAuthPackage.Helpers
+namespace EstonianAuthenticationProvider.Helpers
 {
     public class OnetimeTokenMiddleware
     {
@@ -18,7 +18,7 @@ namespace TestAuthPackage.Helpers
 
         public async Task Invoke(HttpContext httpContext)
         {
-            string tokenValue = EncryptionKey.GenerateKey();
+            string tokenValue = KeyGenerator.GenerateKey();
 
             if (httpContext.Session.GetString(SecurityConstants.ClientSecret) == null)
             {
@@ -37,4 +37,5 @@ namespace TestAuthPackage.Helpers
             return builder.UseMiddleware<OnetimeTokenMiddleware>();
         }
     }
+
 }

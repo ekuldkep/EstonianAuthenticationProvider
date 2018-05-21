@@ -5,11 +5,11 @@ using System.Security.Cryptography.X509Certificates;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
-using TestAuthPackage.Constants;
-using TestAuthPackage.Dtos;
 using DigiDocService;
+using EstonianAuthenticationProvider.Constants;
+using EstonianAuthenticationProvider.Dtos;
 
-namespace TestAuthPackage.Helpers
+namespace EstonianAuthenticationProvider.Helpers
 {
     public class CertificationVerificationHelper
     {
@@ -19,6 +19,7 @@ namespace TestAuthPackage.Helpers
             DigiDocService = digiDocService;
         }
 
+        //tundub vb imelik, et miks seda klassis välja ei kutsta
         //Makes response
         public virtual CertificationInfoDto MakeResponse(CheckCertificateResponse checkCertificateResponse)
         {
@@ -80,7 +81,7 @@ namespace TestAuthPackage.Helpers
             return await CertificationInfo(clientCertificate);
         }
 
-        //Does request to DigiDocServiceHelper
+        //Does request to DigiDocService
         public virtual async Task<CertificationInfoDto> CertificationInfo(string clientCertificate)
         {
             var cerClient = DigiDocService.ReturnDigiDocService();

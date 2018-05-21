@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using TestAuthPackage.Constants;
+using EstonianAuthenticationProvider.Constants;
 
-namespace TestAuthPackage.Dtos
+namespace EstonianAuthenticationProvider.Dtos
 {
     public class CertificationInfoDto
     {

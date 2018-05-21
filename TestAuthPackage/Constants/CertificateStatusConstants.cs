@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TestAuthPackage.Constants
+namespace EstonianAuthenticationProvider.Constants
 {
     public class CertificateStatusConstants
     {

@@ -2,25 +2,25 @@
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
-using TestAuthPackage.Constants;
+using EstonianAuthenticationProvider.Constants;
+using EstonianAuthenticationProvider.Dtos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
-using TestAuthPackage.Dtos;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 
-namespace TestAuthPackage.Helpers
+namespace EstonianAuthenticationProvider.Helpers
 { 
     // You may need to install the Microsoft.AspNetCore.Http.Abstractions package into your project
     public class AuthMiddlewareHelper
     {
         public CertificateValidalidationConfig CertificateValidalidationConfig;
-        public DigiDocServiceVariables DigiDocServiceVariables;
+        public DigiDocServiceConfig DigiDocServiceConfig;
 
-        //By default returns DigiDocServiceHelper with test wsdl
+        //By default returns DigiDocService with test wsdl
         public virtual DigiDocServiceHelper GetDigiDocService()
         {
-            return new DigiDocServiceHelper(DigiDocServiceVariables);
+            return new DigiDocServiceHelper(DigiDocServiceConfig);
         }
 
         //Returns ertificationVerificationHelper
@@ -65,20 +65,27 @@ namespace TestAuthPackage.Helpers
             return await GetCertificateHttpContext(httpContext);
         }
 
+        public virtual string GetKey()
+        {
+            return CertificateValidalidationConfig.Key;
+        }
+        public virtual string GetSecret(HttpContext httpContext)
+        {
+            return httpContext.Request.Query[SecurityConstants.ClientSecret].ToString();
+        }
+
         //Default encryption can be overwritten with custom encryption
         public virtual string EncryptResponse(AuthenticationDto authenticationDto)
         {
-            var serialisedResult = JsonConvert.SerializeObject(authenticationDto);
-
-            return SecurityHelper.EncryptString(serialisedResult,
-                EncryptionKey.Key());
+            var serialisedResult = authenticationDto.Serialize();
+            return SecurityHelper.EncryptString(serialisedResult, GetKey());
         }
 
         //Starts ID Card authentication
         public async Task InvokeCert(HttpContext httpContext)
         {
             var certificate = await GetCertificate(httpContext);
-            var secret = httpContext.Request.Query[SecurityConstants.ClientSecret].ToString();
+            var secret = GetSecret(httpContext);
 
             if (!string.IsNullOrEmpty(certificate))
             {

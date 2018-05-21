@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TestAuthPackage.Constants
+namespace EstonianAuthenticationProvider.Constants
 {
-    public class EncryptionKey
+    public class KeyGenerator
     {
-        private static string _encryptionKey;
         private static Random random = new Random();
 
         public static string GenerateKey()
@@ -15,15 +14,6 @@ namespace TestAuthPackage.Constants
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             return new string(Enumerable.Repeat(chars, 32)
                 .Select(s => s[random.Next(s.Length)]).ToArray());
-        }
-
-        public static string Key()
-        {
-            if (_encryptionKey == null)
-            {
-                _encryptionKey = GenerateKey();
-            }
-            return _encryptionKey;
         }
     }
 }

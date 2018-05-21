@@ -12,7 +12,7 @@ namespace DigiDocService
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", ConfigurationName="DigiDocServiceHelper.DigiDocServicePortType")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", ConfigurationName="DigiDocService.DigiDocServicePortType")]
     public interface DigiDocServicePortType
     {
         
@@ -145,7 +145,7 @@ namespace DigiDocService
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl")]
     public partial class DataFileData
     {
         
@@ -295,7 +295,7 @@ namespace DigiDocService
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl")]
     public partial class DataFileAttribute
     {
         
@@ -335,7 +335,7 @@ namespace DigiDocService
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl")]
     public partial class DataFileDigest
     {
         
@@ -407,7 +407,7 @@ namespace DigiDocService
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl")]
     public partial class DataFileDigestList
     {
         
@@ -430,7 +430,7 @@ namespace DigiDocService
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl")]
     public partial class RevokedInfo
     {
         
@@ -502,7 +502,7 @@ namespace DigiDocService
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl")]
     public partial class CRLInfo
     {
         
@@ -605,7 +605,7 @@ namespace DigiDocService
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl")]
     public partial class TstInfo
     {
         
@@ -772,7 +772,7 @@ namespace DigiDocService
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl")]
     public partial class CertificateInfo
     {
         
@@ -907,7 +907,7 @@ namespace DigiDocService
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl")]
     public partial class CertificatePolicy
     {
         
@@ -963,7 +963,7 @@ namespace DigiDocService
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl")]
     public partial class ConfirmationInfo
     {
         
@@ -1019,7 +1019,7 @@ namespace DigiDocService
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl")]
     public partial class SignerInfo
     {
         
@@ -1075,7 +1075,7 @@ namespace DigiDocService
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl")]
     public partial class SignatureProductionPlace
     {
         
@@ -1147,7 +1147,7 @@ namespace DigiDocService
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl")]
     public partial class SignerRole
     {
         
@@ -1186,7 +1186,7 @@ namespace DigiDocService
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl")]
     public partial class Error
     {
         
@@ -1241,7 +1241,7 @@ namespace DigiDocService
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl")]
     public partial class SignatureInfo
     {
         
@@ -1423,7 +1423,7 @@ namespace DigiDocService
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl")]
     public partial class DataFileInfo
     {
         
@@ -1557,7 +1557,7 @@ namespace DigiDocService
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl")]
     public partial class SignedDocInfo
     {
         
@@ -1626,7 +1626,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="StartSession", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="StartSession", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class StartSessionRequest
     {
         
@@ -1657,7 +1657,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="StartSessionResponse", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="StartSessionResponse", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class StartSessionResponse
     {
         
@@ -1684,7 +1684,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="CreateSignedDoc", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="CreateSignedDoc", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class CreateSignedDocRequest
     {
         
@@ -1715,7 +1715,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="CreateSignedDocResponse", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="CreateSignedDocResponse", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class CreateSignedDocResponse
     {
         
@@ -1738,7 +1738,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="AddDataFile", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="AddDataFile", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class AddDataFileRequest
     {
         
@@ -1785,7 +1785,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="AddDataFileResponse", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="AddDataFileResponse", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class AddDataFileResponse
     {
         
@@ -1808,7 +1808,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="RemoveDataFile", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="RemoveDataFile", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class RemoveDataFileRequest
     {
         
@@ -1831,7 +1831,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="RemoveDataFileResponse", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="RemoveDataFileResponse", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class RemoveDataFileResponse
     {
         
@@ -1854,7 +1854,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetSignedDoc", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetSignedDoc", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class GetSignedDocRequest
     {
         
@@ -1873,7 +1873,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetSignedDocResponse", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetSignedDocResponse", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class GetSignedDocResponse
     {
         
@@ -1896,7 +1896,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetSignedDocInfo", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetSignedDocInfo", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class GetSignedDocInfoRequest
     {
         
@@ -1915,7 +1915,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetSignedDocInfoResponse", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetSignedDocInfoResponse", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class GetSignedDocInfoResponse
     {
         
@@ -1938,7 +1938,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetDataFile", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetDataFile", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class GetDataFileRequest
     {
         
@@ -1961,7 +1961,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetDataFileResponse", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetDataFileResponse", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class GetDataFileResponse
     {
         
@@ -1984,7 +1984,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetSignersCertificate", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetSignersCertificate", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class GetSignersCertificateRequest
     {
         
@@ -2007,7 +2007,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetSignersCertificateResponse", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetSignersCertificateResponse", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class GetSignersCertificateResponse
     {
         
@@ -2030,7 +2030,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetNotarysCertificate", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetNotarysCertificate", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class GetNotarysCertificateRequest
     {
         
@@ -2053,7 +2053,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetNotarysCertificateResponse", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetNotarysCertificateResponse", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class GetNotarysCertificateResponse
     {
         
@@ -2076,7 +2076,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetNotary", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetNotary", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class GetNotaryRequest
     {
         
@@ -2099,7 +2099,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetNotaryResponse", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetNotaryResponse", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class GetNotaryResponse
     {
         
@@ -2122,7 +2122,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetTSACertificate", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetTSACertificate", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class GetTSACertificateRequest
     {
         
@@ -2145,7 +2145,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetTSACertificateResponse", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetTSACertificateResponse", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class GetTSACertificateResponse
     {
         
@@ -2168,7 +2168,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetCRL", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetCRL", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class GetCRLRequest
     {
         
@@ -2191,7 +2191,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetCRLResponse", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetCRLResponse", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class GetCRLResponse
     {
         
@@ -2214,7 +2214,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="PrepareSignature", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="PrepareSignature", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class PrepareSignatureRequest
     {
         
@@ -2265,7 +2265,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="PrepareSignatureResponse", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="PrepareSignatureResponse", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class PrepareSignatureResponse
     {
         
@@ -2292,7 +2292,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="FinalizeSignature", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="FinalizeSignature", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class FinalizeSignatureRequest
     {
         
@@ -2319,7 +2319,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="FinalizeSignatureResponse", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="FinalizeSignatureResponse", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class FinalizeSignatureResponse
     {
         
@@ -2342,7 +2342,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="RemoveSignature", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="RemoveSignature", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class RemoveSignatureRequest
     {
         
@@ -2365,7 +2365,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="RemoveSignatureResponse", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="RemoveSignatureResponse", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class RemoveSignatureResponse
     {
         
@@ -2388,7 +2388,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetVersion", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetVersion", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class GetVersionRequest
     {
         
@@ -2399,7 +2399,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetVersionResponse", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetVersionResponse", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class GetVersionResponse
     {
         
@@ -2430,7 +2430,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MobileSign", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MobileSign", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class MobileSignRequest
     {
         
@@ -2530,7 +2530,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MobileSignResponse", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MobileSignResponse", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class MobileSignResponse
     {
         
@@ -2557,7 +2557,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetStatusInfo", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetStatusInfo", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class GetStatusInfoRequest
     {
         
@@ -2584,7 +2584,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetStatusInfoResponse", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetStatusInfoResponse", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class GetStatusInfoResponse
     {
         
@@ -2611,7 +2611,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MobileAuthenticate", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MobileAuthenticate", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class MobileAuthenticateRequest
     {
         
@@ -2670,7 +2670,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MobileAuthenticateResponse", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MobileAuthenticateResponse", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class MobileAuthenticateResponse
     {
         
@@ -2729,7 +2729,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetMobileAuthenticateStatus", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetMobileAuthenticateStatus", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class GetMobileAuthenticateStatusRequest
     {
         
@@ -2752,7 +2752,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetMobileAuthenticateStatusResponse", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetMobileAuthenticateStatusResponse", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class GetMobileAuthenticateStatusResponse
     {
         
@@ -2775,7 +2775,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MobileCreateSignature", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MobileCreateSignature", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class MobileCreateSignatureRequest
     {
         
@@ -2880,7 +2880,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MobileCreateSignatureResponse", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MobileCreateSignatureResponse", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class MobileCreateSignatureResponse
     {
         
@@ -2907,7 +2907,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetMobileCreateSignatureStatus", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetMobileCreateSignatureStatus", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class GetMobileCreateSignatureStatusRequest
     {
         
@@ -2930,7 +2930,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetMobileCreateSignatureStatusResponse", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetMobileCreateSignatureStatusResponse", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class GetMobileCreateSignatureStatusResponse
     {
         
@@ -2957,7 +2957,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetMobileCertificate", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetMobileCertificate", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class GetMobileCertificateRequest
     {
         
@@ -2988,7 +2988,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetMobileCertificateResponse", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetMobileCertificateResponse", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class GetMobileCertificateResponse
     {
         
@@ -3019,7 +3019,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="CheckCertificate", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="CheckCertificate", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class CheckCertificateRequest
     {
         
@@ -3042,7 +3042,7 @@ namespace DigiDocService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="CheckCertificateResponse", WrapperNamespace="http://www.sk.ee/DigiDocServiceHelper/DigiDocService_2_3.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="CheckCertificateResponse", WrapperNamespace="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl", IsWrapped=true)]
     public partial class CheckCertificateResponse
     {
         

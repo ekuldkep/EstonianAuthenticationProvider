@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TestAuthPackage.Constants
+namespace EstonianAuthenticationProvider.Constants
 {
     public class CertificateValidalidationConfig
     {
@@ -18,6 +18,7 @@ namespace TestAuthPackage.Constants
         };
         public string Thumbprint { get; set; }
         public string RedirectUrl { get; set; }
+        public string Key { get; set; }
        
     }
 }

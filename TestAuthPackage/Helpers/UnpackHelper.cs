@@ -1,30 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using EstonianAuthenticationProvider.Constants;
+using EstonianAuthenticationProvider.Dtos;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
-using TestAuthPackage.Constants;
-using TestAuthPackage.Dtos;
 
-namespace TestAuthPackage.Helpers
+namespace EstonianAuthenticationProvider.Helpers
 {
     public static class UnpackHelper
     {
-        public static AuthenticationDto UnpackDto(HttpContext httpContext)
+        // decrypt and blacklist check for token
+        public static AuthenticationDto UnpackDto(String key, HttpContext httpContext)
         {
             var secretLocal = httpContext.Session.GetString(SecurityConstants.ClientSecret);
 
             var token = httpContext.Request.Query["token"].ToString();
 
-            var decryptedToken = SecurityHelper.DecryptString(token, EncryptionKey.Key());
+            var decryptedToken = SecurityHelper.DecryptString(token, key);
 
-            var authenticationDto =  JsonConvert.DeserializeObject<AuthenticationDto>(decryptedToken);
+            var authenticationDto =  AuthenticationDto.DeSerialize(decryptedToken);
 
             if (authenticationDto.Secret == secretLocal)
             {
                 return null;
             }
-
+            // TODO: DELETE ClientSecret from Session
             return authenticationDto;
         }
     }

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TestAuthPackage.Constants
+namespace EstonianAuthenticationProvider.Constants
 {
-    public class MobileIdServiceConstants
+    public class MobileIdHelperConfig
     {
         public string CountryCode { get; set; } = "";
         public string Language { get; set; } = "EST";

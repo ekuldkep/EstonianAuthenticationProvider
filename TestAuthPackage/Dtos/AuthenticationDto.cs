@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using TestAuthPackage.Constants;
+using EstonianAuthenticationProvider.Constants;
 
-namespace TestAuthPackage.Dtos
+namespace EstonianAuthenticationProvider.Dtos
 {
     public class AuthenticationDto
     {
@@ -24,9 +24,30 @@ namespace TestAuthPackage.Dtos
         public int SessionCode { get; set; }
         public string CertificateData { get; set; }
         public string Challenge { get; set; }
-        public AuthenticationResultType AuthenticationResultType { get; set; }
+        public MobileIdAuthResultType MobileIdAuthResultType { get; set; }
         public string Message { get; set; }
         public bool IsMobileIdValid { get; set; }
         public string ErrorCode { get; set; }
+
+        public string Serialize()
+        {
+            return $"{IdCode},{FirstName},{LastName}," +
+                   $"{UserCountry},{UserOrganisation}," +
+                   $"{Secret}";
+        }
+
+        public static AuthenticationDto DeSerialize(string serializedDto)
+        {
+            var dto = new AuthenticationDto();
+            var variables = serializedDto.Split(',');
+            dto.IdCode = variables[0];
+            dto.FirstName = variables[1];
+            dto.LastName = variables[2];
+
+            dto.UserCountry = variables[3];
+            dto.UserOrganisation = variables[4];
+            dto.Secret = variables[5];
+            return dto;
+        }
     }
 }
